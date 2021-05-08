@@ -1,0 +1,13 @@
+apt update
+apt install libncurses-dev gawk flex bison openssl libssl-dev dkms libelf-dev libudev-dev libpci-dev libiberty-dev autoconf git gcc-8 -y
+
+ln -fs gcc-8 /usr/bin/gcc
+
+git clone https://github.com/torvalds/linux.git linux.git
+cd linux.git
+git checkout v5.4
+
+curl https://raw.githubusercontent.com/eeertekin/microvm/master/vmlinux-5.4.config > .config
+make menuconfig
+
+make -j32 vmlinux
